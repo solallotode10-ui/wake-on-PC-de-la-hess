@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wake on PC - Solal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js"></script>
+</head>
+<body>
+    <div id="bg-overlay" class="bg-overlay"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+
+    <div class="app-container">
+        <div id="step-register" class="glass-card hidden">
+            <h2>Configuration</h2>
+            <div class="profile-upload">
+                <label for="pfp-input" class="pfp-label">
+                    <div id="pfp-display" class="pfp-circle"><span>+</span></div>
+                </label>
+                <input type="file" id="pfp-input" accept="image/*" hidden>
+            </div>
+            <input type="text" id="reg-first-name" placeholder="Ton Prénom" class="glass-input">
+            <p>Code PIN à 4 chiffres :</p>
+            <div class="pin-display">
+                <div class="pin-dot"></div><div class="pin-dot"></div>
+                <div class="pin-dot"></div><div class="pin-dot"></div>
+            </div>
+            <div class="numpad">
+                <div class="key" data-val="1">1</div><div class="key" data-val="2">2</div><div class="key" data-val="3">3</div>
+                <div class="key" data-val="4">4</div><div class="key" data-val="5">5</div><div class="key" data-val="6">6</div>
+                <div class="key" data-val="7">7</div><div class="key" data-val="8">8</div><div class="key" data-val="9">9</div>
+                <div class="key" data-val="del">⌫</div><div class="key" data-val="0">0</div>
+                <div class="key-ok" onclick="registerAccount()">OK</div>
+            </div>
+        </div>
+
+        <div id="step-login" class="glass-card hidden">
+            <div id="pfp-main" class="pfp-circle-large"></div>
+            <h2 id="user-welcome">Bonjour</h2>
+            <div class="pin-display">
+                <div class="pin-dot"></div><div class="pin-dot"></div>
+                <div class="pin-dot"></div><div class="pin-dot"></div>
+            </div>
+            <div class="numpad">
+                <div class="key" data-val="1">1</div><div class="key" data-val="2">2</div><div class="key" data-val="3">3</div>
+                <div class="key" data-val="4">4</div><div class="key" data-val="5">5</div><div class="key" data-val="6">6</div>
+                <div class="key" data-val="7">7</div><div class="key" data-val="8">8</div><div class="key" data-val="9">9</div>
+                <div class="key" data-val="del">⌫</div><div class="key" data-val="0">0</div>
+            </div>
+        </div>
+
+        <div id="step-app" class="glass-card hidden">
+            <div class="top-bar">
+                <button class="icon-btn" onclick="showStep('step-settings')">⚙️</button>
+                <div class="status-badge">Prêt</div>
+            </div>
+            <div class="main-controller">
+                <button id="main-power-btn" class="power-btn-circle on" onclick="handlePowerClick()">ON</button>
+                <p>Appuyez pour allumer le PC</p>
+            </div>
+            <div class="quick-actions">
+                <div class="action-card">
+                    <span>Anti-veille</span>
+                    <label class="switch">
+                        <input type="checkbox" id="nosleep-toggle" onchange="toggleNoSleep()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div id="step-settings" class="glass-card hidden">
+            <h3>Paramètres</h3>
+            <div class="settings-list">
+                <label>Changer le fond</label>
+                <input type="file" id="bg-input" accept="image/*" class="glass-input">
+                <label>IP de l'ESP32</label>
+                <input type="text" id="esp32-ip-input" placeholder="Ex: 192.168.1.50" class="glass-input">
+                <button class="save-btn" onclick="saveESP32IP()">Sauvegarder IP</button>
+                <button class="icon-btn-back" onclick="showStep('step-app')">Retour</button>
+                <button class="danger-btn" onclick="logout()">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
